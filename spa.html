@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Dynamic Website with React</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        const {useState}=React
+
+          
+        function App(){
+             
+              const[link1,setLink1]=useState('Home')
+              const[link2,setLink2]=useState('About')
+              const[link3,setLink3]=useState('Contact')
+            
+            return(
+                <nav style={{display:'flex',justifyContent:'space-between', backgroundColor:'#f1f1f1',fontSize:'50px'}}>
+                   <a href="#" onClick={()=>setLink1("Welcome to Home")}>{link1}</a>
+
+                   <a href="#"  onClick={()=>setLink2('About Us')}>{link2}</a>
+
+                   <a href="#" onClick={()=>setLink3('Contact Us')}>{link3}</a>
+                </nav>
+            )
+        }
+        root.render(<App/>);
+        </script>
+</body>
+</html>
