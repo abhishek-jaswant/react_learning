@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="dom">
+        <p>hii sym kaka</p>
+        <button>click me</button>
+    </div>
+        <div id="root"></div>
+
+    <script>
+        const dom = document.getElementById('dom');
+        const button = document.querySelector('button');
+        const p = document.querySelector('p');
+
+        button.addEventListener('click',()=>{
+            p.innerText = "hello ramu kaka";
+        })
+    </script>
+
+
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        const {useState}=React
+
+          
+        function App(){
+             
+              const[text,setText]=useState('hello react')
+            
+            return(
+                <div>
+                    <p>{text}</p>
+                    <button onClick={()=>setText('hello ramu kaka')}>click me</button>
+                </div>
+            )
+        }
+        root.render(<App/>);
+    </script>
+</body>
+</html>
