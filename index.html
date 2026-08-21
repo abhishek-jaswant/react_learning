@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+
+    <div id="container" style="width:100px;
+               height:100px;
+               background-color:red;
+               text-align:center;
+               display:flex;
+               justify-content:center;
+               align-items:center;">
+    </div>
+
+    <div id="root">hello dom</div>
+
+
+    <script>
+        // Imperative Approach
+        let div = document.getElementById("container");
+
+        let p = document.createElement("p");
+
+        p.innerText = "Hello World";
+
+        div.appendChild(p);
+    </script>
+
+
+    <script>
+        // Declarative Approach
+         
+        const container = document.getElementById("root");
+
+        const root = ReactDOM.createRoot(container);
+            console.log(React);
+            console.log(ReactDOM);
+        let newp = React.createElement(
+            "p",
+            null,
+            "Hello World"
+        );
+
+        root.render(newp);
+    </script>
+
+</body>
+
+</html>
