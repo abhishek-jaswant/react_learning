@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> 
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root=ReactDOM.createRoot(document.getElementById("root"))
+        
+        const Card=({title,children})=>{
+            return(
+                <div style={{border:'1px solid black',padding:'10px',margin:'10px', width:'300px',height:'200px',alignItems:"center",justifyContent:'center ',display:'flex',flexDirection:'column'}}>
+                    
+                    <h3 style={{fontSize:'30px'}}>{title}</h3>
+                    <div style={{fontSize:'30px'}}>{children}</div>
+                </div>
+            )  }
+
+            const App=()=>{
+                return(
+                    <div style={{display:'flex',justifyContent:'space-around',flexWrap:'wrap',margin:'30px'}}>
+                        <Card title="First Card">
+                            <p>This is the first card</p>
+                        </Card>
+
+                        <Card title="Second Card">
+                            <p>This is the second card</p>
+                        </Card>
+
+                        <Card title="Third Card">
+                            <p>This is the third card</p>
+                        </Card>
+                    </div>
+                )
+
+            }
+
+            root.render(<App/>)
+
+    </script>
+</body>
+</html>
