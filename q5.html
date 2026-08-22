@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root=ReactDOM.createRoot(document.getElementById("root"));
+
+        const Card=({children})=>{
+            return(
+                <div style={{border:'1px solid black',padding:'10px',display:'flex',flexDirection:'row',width:"auto",height:"auto", justifyContent: "space-between", padding:"10px",}}>
+                    {children}
+                </div>
+            )  }
+
+            const App=()=>{
+               const features= ["1 lorem ipsum", "Lorem, ipsum dolor.", "Monthly updates"];
+                return(
+                    <div style={{display:'flex',flexDirection:'column',margin:'30px'}}>
+
+                        <Card >
+                            <h1 style={{color:"black",fontSize:"40px"}}>The Right plan for <span style={{color:"#ab92dd"}}>  <br />your business </span></h1>
+                            <p style={{ fontSize: "25px" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate dolor aut ipsum non ullam? Doloremque vitae distinctio quaerat perferendis eius eligendi reiciendis aut id ad natus? Iste, soluta voluptas ut aperiam quaerat ipsa reprehenderit, mollitia quidem iure tempore explicabo facere?</p>      
+                        </Card>
+
+                        <Card >
+                            <h1 style={{color:"black"}}>Start</h1>
+                             <ul style={{ color: "black", fontSize: "20px", flexDirection: "column", display: "flex", gap: "10px", listStyleType: "none", padding: "0", margin: "0" }}>
+                                {features.map((feature, idx) => (
+                                    <li key={idx}>✔ {feature}</li>
+                                ))}
+                            </ul>
+                            <h1 style={{color:"black",fontSize:"bolt"}}>Free</h1>
+                           <button
+                                style={{
+                                    backgroundColor: "#cbd5e0",
+                                    color: "#9e79eb",
+                                    borderRadius: "50px",
+                                    fontSize: "20px",
+                                    width: "150px",
+                                    height: "50px",
+                                    padding: "10px",
+                                    margin:"40px"
+                                }}
+                            >
+                                Get started
+                            </button>
+                          
+                        </Card>
+
+                       <Card>
+                            <h1 style={{ color: "black" }}>Lorem Plus</h1>
+                            <ul style={{color:"black",fontSize:"20px",flexDirection:"column",display:"flex",gap:"10px",listStyleType:"none",padding:"0",margin:"0"}}>
+                                {features.map((feature, idx) => ( 
+                                    <li key={idx}>✔ {feature}</li>
+                                ))}
+                                </ul>
+                            <h1 style={{ color: "black", fontSize: "bolt" }}>$32.00</h1>
+                            <button  style={{
+                                backgroundColor: "#cbd5e0",
+                                color: "#9e79eb",
+                                borderRadius: "50px",
+                                fontSize: "20px",
+                                width: "150px",
+                                height: "50px",
+                                padding: "10px",
+                                margin: "40px"
+                            }}>Get started</button>
+
+                        </Card>
+
+
+                         <Card>
+                            <h1 style={{ color: "black" }}>Lorem Pro</h1>
+                          <ul style={{ color: "black", fontSize: "20px", flexDirection: "column", display: "flex", gap: "10px", listStyleType: "none", padding: "0", margin: "0" }}>
+                               {features.map((feature, idx) => (
+                                    <li key={idx}>✔ {feature}</li>
+                                ))}
+                            </ul>
+                            <h1 style={{ color: "black", fontSize: "bolt" }}>$50.00</h1>
+                            <button  style={{
+                                backgroundColor: "#9e79eb",
+                                color: "white",
+                                borderRadius: "50px",
+                                fontSize: "20px",
+                                width: "150px",
+                                height: "50px",
+                                padding: "10px",
+                                margin: "40px"
+                            }}>Get started</button>
+
+                        </Card>
+
+
+                        
+                            </div>  
+                        )
+
+                    }
+
+                    root.render(<App/>)
+
+    </script>
+</body>
+</html>
