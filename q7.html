@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Blog Toggle Viewer</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> 
+     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+   
+<div id="root"></div>
+<script type="text/babel">
+
+  const {useState}=React;
+
+
+
+    const Card=(props)=>{
+        const item=props.item;
+        const [isBlog,setIsBlog]=useState(false);
+
+        return isBlog?<div onClick={()=>setIsBlog(!isBlog)} style={{border:'1px solid black',padding:'10px',display:'flex',flexDirection:'column',width:"auto",height:"auto", justifyContent: "space-between", padding:"10px",boxShadow:'2px 2px 2px black'}}>
+
+                <h2 style={{color:"blue",fontSize:"50px"}}>{item.title}</h2>
+                <p style={{color:"black",fontSize:"40px"}}>{item.content}</p>
+
+            </div>:<h2 onClick={()=>setIsBlog(!isBlog)} style={{color:"blue",fontSize:"30px"}}>{item.title}</h2>
+    };
+
+        
+    
+
+
+
+const App=()=>{
+
+  const blogs = [
+        { title: "Mastering JavaScript", content: "JavaScript is a powerful language for web development." },
+        { title: "React in Indian Startups", content: "React is widely used in many Indian tech companies." },
+        { title: "Career in Web Development", content: "Explore job roles and growth in web development." },
+    ];
+
+  return(
+    <div style={{display:'flex',flexDirection:'column',margin:'30px',gap:'10px',justifyContent:'center',alignItems:'center'}}>
+
+      <h1 style={{color:"black",fontSize:"40px"}}>React Blogs</h1>
+
+ 
+      {blogs.map((item,idx)=><Card item={item} key={idx}/>)}
+     
+    </div>
+  )
+}
+
+const root=ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+</script>
+</body>
+</html>
