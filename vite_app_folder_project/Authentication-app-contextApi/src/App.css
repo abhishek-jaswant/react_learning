@@ -1,0 +1,84 @@
+
+.App{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.App-header{
+  background-color: #1d56c7;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(5, 38, 203, 0.324);
+}
+h1{
+  font-size: 24px;
+  margin: 0;
+  padding: 0; 
+}
+.App-button{
+  background-color: #282c34;
+  color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.App-main{
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.App-loading{
+  background-color: #282c34;
+  color: white;
+ font-size: 24px;
+ text-align: center;
+ 
+}
+.App-error{
+  background-color: #282c34;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+.App-data{
+  width: 100%;
+  max-width: 1400px;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+.App-data-item{
+  background-color: #444;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+}
+img{
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 5px; 
+}
+
+.App-footer{
+  background-color: #282c34;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
