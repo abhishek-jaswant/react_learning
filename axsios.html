@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Explorer with Search, Sort, Filter, and Theme Toggle</title>
+  
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f2f2f2;
+               
+            }
+            .spinner {
+                width: 50px;
+                height: 50px;
+                border: 5px solid #ddd;
+                border-top: 5px solid blue;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                text-align: center;
+              
+                
+            }
+        
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+        
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            button:hover {
+    background-color: darkblue;
+    color: white;
+}
+           </style>
+</head>
+<body>
+    
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const {useState}=React;
+
+        const App=()=>{
+            const [data,setData]=useState([])
+            const [Loading,setLoading]=useState(false)
+            const [Error,setError]=useState("")
+            const [searchName,setSearchName]=useState("")
+            const [sortBy,setSortBy]=useState("")
+            const [filterBy,setFilterBy]=useState("all")
+            const [theme,setTheme]=useState("dark")
+            const [filteredData,setFilteredData]=useState([])
+
+
+            const displayedData = data
+                .filter((meme) => {
+                    return meme.name
+                        .toLowerCase()
+                        .includes(searchName.toLowerCase());
+                })
+                .filter((meme) => {
+                    if (filterBy === "width") {
+                        return meme.width > 500;
+                    }
+
+                    if (filterBy === "height") {
+                        return meme.height > 500;
+                    }
+
+                    return true;
+                });
+           
+           
+            const handleFetchData= async(e)=>{
+                e.preventDefault()
+                try {
+                    setLoading(true)
+                    setError("")
+                    const response=await axios.get(`https://api.imgflip.com/get_memes`)
+                      const data=response.data.data.memes
+
+                    console.log(data)
+                    setData(data)
+                    setFilteredData(data)
+                
+                } catch (error) {
+                    setError(error.message) 
+               
+                }finally{   
+                    setLoading(false)   
+            }
+        }
+ 
+             const handleSortAssending=()=>{
+                 
+               setData((prev)=>[...prev].sort((a,b)=>a.name.localeCompare(b.name)))  
+                
+             }
+
+             const handleSortDescending=()=>{
+                
+                 
+               setData((prev)=>[...prev].sort((a,b)=>b.name.localeCompare(a.name)))
+                 
+                
+             }
+
+
+            if(Loading)
+            {
+                return(<p className="spinner">Data is Loading...</p>)
+            }
+             if(Error)
+             {
+                return(<p style={{color:"red"}}> Error: {Error}</p>)
+             }
+
+
+             return(
+                <>
+                <header
+                         style={{
+                             display: "flex",
+                             alignItems: "center",
+                             justifyContent: "space-between",
+                             padding: "15px 30px",
+                             width: "100%",
+                             boxSizing: "border-box",
+                             backgroundColor: "#1e293b",
+                             color: "white",
+                             boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                         }}
+                     >
+                         {/* Logo */}
+                         <h2 style={{ margin: 0 }}>
+                             MyApp
+                         </h2>
+
+                         {/* Navigation */}
+                         <nav
+                             style={{
+                                 display: "flex",
+                                 alignItems: "center",
+                                 gap: "20px",
+                             }}
+                         >
+                           
+                             <button
+                                 onClick={(e) => handleFetchData(e)}
+                                 style={{
+                                     padding: "9px 16px",
+                                     border: "none",
+                                     borderRadius: "6px",
+                                     backgroundColor: "#3b82f6",
+                                     color: "white",
+                                     cursor: "pointer",
+                                     fontSize: "15px",
+                                 }}
+                             >
+                                 Fetch Data
+                             </button>
+                         </nav>
+                     </header>
+
+                     <main style={{
+                         display: "flex",
+                         flexDirection: "column",
+                         alignItems: "center",
+                         justifyContent: "center",
+                         gap: "20px",
+                         padding: "20px",
+                         backgroundColor: "#f2f2f2",
+                     }}>
+                     <section style={{display:"flex",flexDirection:"row",justifyContent:"space-between",alignItems:"center", padding: "15px 30px",
+                             width: "100%",
+                             boxSizing: "border-box",
+                    
+                             color: "white",
+                             boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+}}>
+                        <input   style={{color:"black",backgroundColor:"white",border:"none",padding:"10px",width:"200px", borderRadius:"2px ", fontSize: "30px", border: "2px solid black" }} type="text" value={searchName} placeholder="Search memes by name" onChange={(e)=>setSearchName(e.target.value)}/>
+                         <button  style={{color:"blue",backgroundColor:"white",border:"none",padding:"10px",width:"200px", borderRadius:"2px ",cursor:"pointer", fontSize: "30px" }} onClick={handleSortAssending}>assending</button>
+                         <button  style={{color:"blue",backgroundColor:"white",border:"none",padding:"10px",width:"200px", borderRadius:"2px ",cursor:"pointer", fontSize: "30px" }} onClick={handleSortDescending}>descending</button>
+                      
+                         <select  style={{color:"black",backgroundColor:"white",border:"none",padding:"10px",width:"200px", borderRadius:"2px",fontSize:"30px"}} value={filterBy} onChange={(e)=>setFilterBy(e.target.value)}>
+                                  <option value="all">All Memes</option>
+                                 <option value="width">Width &gt; 500</option>
+                                 <option value="height">Height &gt; 500</option>
+                         </select>
+                        
+                        </section>
+
+                         <section style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(300px, 1fr))",gap:"10px",width:"100%",padding:"20px"}}>
+
+                            {displayedData.map((meme, index) => (
+                                <div key={meme.id} style={{ backgroundColor: "white", borderRadius: "10px", boxShadow: "0 0 5px rgba(0,0,0,0.1)", padding: "20px",alignItems:"center",justifyContent:"center",display:"flex",flexDirection:"column",gap:"10px"}}>
+                                    <img src={meme.url} alt={meme.name} style={{ width: "100px", height: "100px", objectFit: "contain" }} />
+                                    <h2 style={{ margin: "0" }}>{meme.name}</h2>
+                                    <p style={{ margin: "10px 0" }}> Width:{meme.width}</p>
+                                    <p style={{ margin: "10px 0" }}>Hight:{meme.height}</p>
+                        
+                                </div>
+                            ))}
+                        </section>
+                        
+
+                    </main>
+                </>
+            )
+        
+        }
+
+
+            ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+
+    </script>
+</body>
+</html>
